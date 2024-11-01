@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Resultados das Imagens</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f6f8;
+            color: #333;
+            text-align: center;
+        }
+        h1 {
+            color: #b22222;
+            margin-bottom: 20px;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+        li {
+            background-color: #ffffff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 10px;
+            width: 200px;
+            transition: box-shadow 0.3s;
+            text-align: center;
+        }
+        li:hover {
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        img {
+            max-width: 100%;
+            max-height: 150px;
+            height: auto;
+            border-radius: 4px;
+            object-fit: cover;
+        }
+        .image-title {
+            font-size: 0.9em;
+            color: #2c3e50;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        p {
+            margin-top: 20px;
+            font-size: 1.2em;
+            color: #e74c3c;
+        }
+        a {
+            display: inline-block;
+            margin-top: 20px;
+            text-decoration: none;
+            color: #b22222;
+            font-weight: bold;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+<h1>Imagens encontradas</h1>
+
+<div th:if="${images}">
+    <ul>
+        <li th:each="image : ${images}">
+            <img th:src="${image.url}" alt="Image" />
+            <div class="image-title" th:text="${image.title} ?: 'Sem título'">Título da Imagem</div>
+        </li>
+    </ul>
+</div>
+
+<div th:if="${#lists.isEmpty(images)}">
+    <p>Nenhuma imagem encontrada.</p>
+</div>
+
+<a href="/">Voltar</a>
+</body>
+</html>
